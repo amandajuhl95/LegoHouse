@@ -47,9 +47,9 @@ public class LogicManager
         return itemlist.getLegoHouse();
     }
 
-    public User getUser(String email, String password) throws SQLException
+    public User userLogin(String email, String password) throws SQLException
     {
-        return db.getUser(email, password);
+        return db.userLogin(email, password);
     }
 
     public String createOrder(Order newOrder) throws SQLException
@@ -68,6 +68,21 @@ public class LogicManager
     public Order getOrder(int order_id) throws SQLException
     {
         return db.getOrder(order_id);
+    }
+    
+    public List<Order> getOrders(User user) throws SQLException
+    {
+        return db.getOrders(user.getId());
+    }
+    
+    public List<Order> getAllOrders() throws SQLException
+    {
+        return db.getAllOrders();
+    }
+    
+    public User getUser(int user_id) throws SQLException
+    {
+        return db.getUser(user_id);
     }
 
     public String createUser(User u) throws SQLException

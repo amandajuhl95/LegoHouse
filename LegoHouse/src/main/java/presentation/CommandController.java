@@ -25,6 +25,10 @@ public class CommandController
         commands.put("shop", new ShopCommand("shop.jsp"));
         commands.put("shoppingcart", new ShoppingcartCommand("shoppingcart.jsp"));
         commands.put("checkout", new CheckoutCommand("checkout.jsp"));
+        commands.put("customer", new CustomerCommand("customer.jsp"));
+        commands.put("customerOrder", new CustomerOrderCommand("customerOrder.jsp"));
+        commands.put("employee", new EmployeeCommand("employee.jsp"));
+        commands.put("employeeOrder", new EmployeeOrderCommand("employeeOrder.jsp"));
     }
     
     public static synchronized Command commandFrom(String key)

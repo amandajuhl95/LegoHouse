@@ -22,10 +22,12 @@ class OrderMapper
 {
     
     private DatabaseConnector dbc;
+    private UserMapper um;
     
-    public OrderMapper(DatabaseConnector dbc) throws SQLException
+    public OrderMapper(DatabaseConnector dbc, UserMapper um) throws SQLException
     {
         this.dbc = dbc;
+        this.um = um;
     }
     
     public Order getOrder(int order_id) throws SQLException
@@ -68,6 +70,46 @@ class OrderMapper
         
         return order;
     }
+    
+    public List<Order> getOrders(int user_id) throws SQLException
+    {
+        dbc.open();
+        
+        List<Order> orders = new ArrayList<>();
+        User user = um.getUser(user_id);
+        
+        String query
+                = "SELECT * "
+                + "FROM order "
+                + "WHERE user_id = '" + user_id + "';";
+        
+        int order_id = 0;
+        String order_date = "";
+        String shipped = "";
+        int length = 0;
+        int width = 0;
+        int height = 0;
+        
+        PreparedStatement statement = dbc.preparedStatement(query);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next())
+        {
+            order_id = rs.getInt("order_id");
+            order_date = rs.getString("order_date");
+            shipped = rs.getString("shipped");
+            length = rs.getInt("length");
+            width = rs.getInt("width");
+            height = rs.getInt("height");
+            
+            orders.add(new Order(order_id, order_date, false, height, width, length));
+        }
+        
+        dbc.close();
+        
+        return orders;
+    }
+    
     
     public List<Order> getAllOrders() throws SQLException
     {

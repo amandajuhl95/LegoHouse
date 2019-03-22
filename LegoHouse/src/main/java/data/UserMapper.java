@@ -27,7 +27,7 @@ class UserMapper
         this.dbc = dbc;
     }
 
-    public User getUser(String email, String password) throws DataException, SQLException
+    public User userLogin(String email, String password) throws DataException, SQLException
     {
         dbc.open();
         String query
@@ -55,6 +55,37 @@ class UserMapper
 
     }
 
+    public User getUser(int user_id) throws DataException, SQLException
+    {
+        dbc.open();
+        String query
+                = "SELECT * "
+                + "FROM user "
+                + "WHERE user_id = " + user_id + ";";
+
+        User user = null;
+        int id = 0;
+        String email = "";
+        String password = "";
+        String role = "";
+
+        PreparedStatement statement = dbc.preparedStatement(query);
+        ResultSet rs = statement.executeQuery();
+
+        if (rs.next())
+        {
+            id = rs.getInt("user_id");
+            email = rs.getString("email");
+            password = rs.getString("password");
+            role = rs.getString("role");
+
+            user = new User(user_id, email, password, role);
+        }
+        dbc.close();
+
+        return user;
+    }
+
     public List<User> getAllUsers() throws SQLException
     {
         dbc.open();
@@ -64,8 +95,8 @@ class UserMapper
                 = "SELECT * FROM user;";
 
         int user_id = 0;
-        String password = "";
         String email = "";
+        String password = "";
         String role = "";
 
         PreparedStatement statement = dbc.preparedStatement(query);

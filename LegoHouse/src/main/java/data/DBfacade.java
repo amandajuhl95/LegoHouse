@@ -20,7 +20,7 @@ public class DBfacade
     private DatabaseConnector dbc = new DatabaseConnector();
     private DataSourceMysql dataSource = new DataSourceMysql();
     private UserMapper um = new UserMapper(dbc);
-    private OrderMapper om = new OrderMapper(dbc);
+    private OrderMapper om = new OrderMapper(dbc, um);
 
     private DBfacade() throws SQLException
     {
@@ -35,10 +35,35 @@ public class DBfacade
         }
         return instance;
     }
+     
+    public void createUser(User newUser) throws SQLException
+    {
+        um.createUser(newUser);
+    }
+
+    public User userLogin(String email, String password) throws DataException, SQLException
+    {
+        return um.userLogin(email, password);
+    }
+    
+    public User getUser(int user_id) throws DataException, SQLException
+    {
+        return um.getUser(user_id);
+    }
+
+    public List<User> getAllUsers() throws SQLException
+    {
+        return um.getAllUsers();
+    }
 
     public Order getOrder(int order_id) throws SQLException
     {
         return om.getOrder(order_id);
+    }
+    
+    public List<Order> getOrders(int user_id) throws SQLException
+    {
+        return om.getOrders(user_id);
     }
 
     public List<Order> getAllOrders() throws SQLException
@@ -54,20 +79,5 @@ public class DBfacade
     public String isShipped(int order_id) throws SQLException
     {
         return om.isShipped(order_id);
-    }
-
-    public User getUser(String email, String password) throws DataException, SQLException
-    {
-        return um.getUser(email, password);
-    }
-
-    public List<User> getAllUsers() throws SQLException
-    {
-        return um.getAllUsers();
-    }
-
-    public void createUser(User newUser) throws SQLException
-    {
-        um.createUser(newUser);
     }
 }

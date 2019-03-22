@@ -9,18 +9,20 @@ import data.DataException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import logic.ItemList;
 import logic.LogicManager;
-import logic.User;
+import logic.Order;
 
 /**
  *
  * @author aamandajuhl
  */
-public class LoginCommand implements Command
+public class CustomerOrderCommand implements Command
 {
+
     private final String target;
-    
-    public LoginCommand(String target)
+
+    public CustomerOrderCommand(String target)
     {
         this.target = target;
     }
@@ -30,13 +32,14 @@ public class LoginCommand implements Command
     {
         HttpSession session = request.getSession();
         
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        int order_id = Integer.parseInt(request.getParameter("selected"));
+        Order order = manager.getOrder(order_id);
+        session.setAttribute("previousO", order);
         
-        User user = manager.userLogin(email, password);
+        ItemList list = manager.calculateLegoHouse(order);
+        session.setAttribute("previousL", list);
         
-        session.setAttribute("user", user);
         return target;
     }
-    
+
 }
