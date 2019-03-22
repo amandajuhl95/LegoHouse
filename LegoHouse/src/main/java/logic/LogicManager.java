@@ -52,9 +52,17 @@ public class LogicManager
         return db.getUser(email, password);
     }
 
-    public void createOrder(Order newOrder) throws SQLException
+    public String createOrder(Order newOrder) throws SQLException
     {
-        db.makeOrder(newOrder);
+        if (newOrder == null)
+        {
+            return "Please enter length, width and height";
+        } else
+        {
+            db.makeOrder(newOrder);
+            return "Your order is now placed";
+        }
+
     }
 
     public Order getOrder(int order_id) throws SQLException
@@ -88,19 +96,6 @@ public class LogicManager
             }
         }
         return false;
-    }
-    
-    public static void main(String[] args) throws SQLException
-    {
-        LogicManager lm = LogicManager.getInstance();
-        User user = lm.getUser("ama", "1234");
-        Order order = new Order(2, 6, 10, user);
-        lm.createOrder(order);
-        ItemList itemlist = lm.calculateLegoHouse(order);
-        System.out.println(itemlist);
-
-        
-        
     }
 
 }

@@ -13,7 +13,8 @@
         <title>LegoShop</title>
     </head>
     <body>
-        <form action="LegoHouse" method="GET">
+    <center>
+        <form action="LegoHouse" method="POST">
             <%
                 User user = (User) session.getAttribute("user");
             %>
@@ -24,5 +25,6 @@
             <br><br>
             <button name="command" value="shoppingcart">Add to shoppingcart</button>
         </form>
-    </body>
+    </center>
+</body>
 </html>

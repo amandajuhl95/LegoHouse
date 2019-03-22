@@ -5,40 +5,35 @@
  */
 package presentation;
 
+import data.DataException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.LogicManager;
-import logic.User;
+import logic.Order;
 
 /**
  *
  * @author aamandajuhl
  */
-public class CreateUserCommand implements Command
+public class CheckoutCommand implements Command
 {
-
     private final String target;
 
-    CreateUserCommand(String target)
+    public CheckoutCommand(String target)
     {
         this.target = target;
     }
 
     @Override
-    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, SQLException
+    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException
     {
         HttpSession session = request.getSession();
+        Order order = (Order) session.getAttribute("order");
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String message = manager.createOrder(order);
+        session.setAttribute("message", message);
 
-        if (email != null && password != null)
-        {
-            User u = new User(email, password);
-            String user = manager.createUser(u);
-            session.setAttribute("user", user);
-        }
         return target;
     }
 

@@ -7,7 +7,6 @@ package presentation;
 
 import data.DataException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.ItemList;
@@ -32,22 +31,26 @@ public class ShoppingcartCommand implements Command
     @Override
     public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException
     {
+        HttpSession session = request.getSession();
+
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         int height = Integer.parseInt(request.getParameter("height"));
-        
-        System.out.println(request.getParameter("length"));
-        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        Order order = new Order(height, width, length, user);
-        ItemList list = manager.calculateLegoHouse(order);
 
-        if (list != null)
+        if (length != 0 && width != 0 && height != 0)
         {
-            session.setAttribute("list", list);
-            session.setAttribute("order", order);
+            Order order = new Order(height, width, length, user);
+            ItemList list = manager.calculateLegoHouse(order);
+
+            if (list != null)
+            {
+                session.setAttribute("list", list);
+                session.setAttribute("order", order);
+                return target;
+            }
         }
-     
+
         return target;
     }
 

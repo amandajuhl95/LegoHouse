@@ -7,13 +7,8 @@ package presentation;
 
 import data.DataException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import logic.ItemList;
 import logic.LogicManager;
-import logic.Order;
-import logic.User;
 
 /**
  *
@@ -32,7 +27,6 @@ public class ShopCommand implements Command
     @Override
     public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException
     {
-        
         return target;
     }
 
