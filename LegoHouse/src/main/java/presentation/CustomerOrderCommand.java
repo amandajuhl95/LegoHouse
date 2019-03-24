@@ -6,7 +6,6 @@
 package presentation;
 
 import data.DataException;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.ItemList;
@@ -28,7 +27,7 @@ public class CustomerOrderCommand implements Command
     }
 
     @Override
-    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException
+    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
         

@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import data.DataException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class FrontController extends HttpServlet
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        
+
         try
         {
             LogicManager manager = LogicManager.getInstance();
@@ -50,28 +51,18 @@ public class FrontController extends HttpServlet
             String target = c.execute(request, manager);
             RequestDispatcher dispatcher = request.getRequestDispatcher(target);
             dispatcher.forward(request, response);
-
         } catch (CommandException ex)
         {
             request.setAttribute("message", ex.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher(ex.getTarget());
             dispatcher.forward(request, response);
-        } catch (IOException | ServletException e)
+        } catch (IOException | ServletException | DataException e)
         {
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Error</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FrontController at " + e.getMessage() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } catch (SQLException ex)
-        {
-            ex.getMessage();
+            request.setAttribute("message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
+            dispatcher.forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

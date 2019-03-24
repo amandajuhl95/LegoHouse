@@ -10,21 +10,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
     <body>
-    <center>
+
         <form action="LegoHouse" method="POST">
             <%
                 User user = (User) session.getAttribute("user");
+                String ref = "LegoHouse?command=customer";
+
+                if (user.getRole().equals("employee"))
+                {
+                    ref = "LegoHouse?command=employee";
+                }
+
+                out.println("<a href=" + ref + ">Orders</a>");
             %>
-            <h1>Welcome to the LegoShop</h1>
-            Length <input type ="number" name ="length" value="" minlength="5" required>
-            Width <input type ="number" name ="width" value="" minlength="5" required>
-            Height <input type ="number" name ="height" value="" minlength="1" required>
-            <br><br>
-            <button name="command" value="shoppingcart">Add to shoppingcart</button>
+            <center>
+                <h1>Welcome to the LegoShop</h1>
+                Length <input type ="number" name ="length" value="" minlength="5" required>
+                Width <input type ="number" name ="width" value="" minlength="5" required>
+                Height <input type ="number" name ="height" value="" minlength="1" required>
+                <br><br>
+                <button name="command" value="shoppingcart">Add to shoppingcart</button>
+            </center>
         </form>
-    </center>
-</body>
+
+    </body>
 </html>

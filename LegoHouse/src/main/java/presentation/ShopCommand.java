@@ -6,7 +6,6 @@
 package presentation;
 
 import data.DataException;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import logic.LogicManager;
 
@@ -25,7 +24,7 @@ public class ShopCommand implements Command
     }
 
     @Override
-    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException
+    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException
     {
         return target;
     }

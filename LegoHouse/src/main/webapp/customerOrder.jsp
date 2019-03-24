@@ -10,8 +10,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
+    <center>
     <body>
         <form action="LegoHouse" method="POST">
             <%
@@ -31,4 +33,5 @@
             %>
         </form>
     </body>
+    </center>
 </html>

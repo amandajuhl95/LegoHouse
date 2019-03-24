@@ -5,7 +5,7 @@
  */
 package presentation;
 
-import java.sql.SQLException;
+import data.DataException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.LogicManager;
@@ -26,18 +26,19 @@ public class CreateUserCommand implements Command
     }
 
     @Override
-    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, SQLException
+    public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
         if (email != null && password != null)
         {
-            User u = new User(email, password);
-            String user = manager.createUser(u);
-            session.setAttribute("user", user);
+            User u = new User(email, password, role);
+            String message = manager.createUser(u);
+            session.setAttribute("message", message);
         }
         return target;
     }

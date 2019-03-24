@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
     <body>
@@ -18,6 +19,7 @@
             <%
                 String message = (String) session.getAttribute("message");
                 out.println(message);
+                session.removeAttribute("message");
             %>
             <br><br><button name="command" value="shop">Go back to shop</button>
         </form>

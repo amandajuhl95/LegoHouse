@@ -22,12 +22,12 @@ public class DBfacade
     private UserMapper um = new UserMapper(dbc);
     private OrderMapper om = new OrderMapper(dbc, um);
 
-    private DBfacade() throws SQLException
+    private DBfacade() throws DataException
     {
         dbc.setDataSource(dataSource.getDataSource());
     }
 
-    public static DBfacade getInstance() throws SQLException
+    public static DBfacade getInstance() throws DataException
     {
         if (instance == null)
         {
@@ -36,47 +36,47 @@ public class DBfacade
         return instance;
     }
      
-    public void createUser(User newUser) throws SQLException
+    public void createUser(User newUser) throws DataException
     {
         um.createUser(newUser);
     }
 
-    public User userLogin(String email, String password) throws DataException, SQLException
+    public User userLogin(String email, String password) throws DataException
     {
         return um.userLogin(email, password);
     }
     
-    public User getUser(int user_id) throws DataException, SQLException
+    public User getUser(int user_id) throws DataException
     {
         return um.getUser(user_id);
     }
 
-    public List<User> getAllUsers() throws SQLException
+    public List<User> getAllUsers() throws DataException
     {
         return um.getAllUsers();
     }
 
-    public Order getOrder(int order_id) throws SQLException
+    public Order getOrder(int order_id) throws DataException
     {
         return om.getOrder(order_id);
     }
     
-    public List<Order> getOrders(int user_id) throws SQLException
+    public List<Order> getOrders(int user_id) throws DataException
     {
         return om.getOrders(user_id);
     }
 
-    public List<Order> getAllOrders() throws SQLException
+    public List<Order> getAllOrders() throws DataException
     {
         return om.getAllOrders();
     }
 
-    public void makeOrder(Order newOrder) throws SQLException
+    public void makeOrder(Order newOrder) throws DataException
     {
         om.makeOrder(newOrder);
     }
 
-    public String isShipped(int order_id) throws SQLException
+    public String isShipped(int order_id) throws DataException
     {
         return om.isShipped(order_id);
     }

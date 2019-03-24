@@ -6,6 +6,7 @@
 package logic;
 
 import data.DBfacade;
+import data.DataException;
 import java.sql.SQLException;
 
 /**
@@ -14,6 +15,7 @@ import java.sql.SQLException;
  */
 public class Order
 {
+
     private int order_id;
     private String date;
     private boolean shipped;
@@ -22,8 +24,8 @@ public class Order
     private int length;
     private User user;
     private DBfacade db = null;
-    
-    public Order(int order_id, String date, boolean shipped, int height, int width, int length) throws SQLException
+
+    public Order(int order_id, String date, boolean shipped, int height, int width, int length) throws DataException
     {
         this.db = DBfacade.getInstance();
         this.order_id = order_id;
@@ -34,7 +36,7 @@ public class Order
         this.length = length;
     }
 
-    public Order(int height, int width, int length, User user) throws SQLException
+    public Order(int height, int width, int length, User user) throws DataException
     {
         this.db = DBfacade.getInstance();
         this.height = height;
@@ -52,7 +54,7 @@ public class Order
     {
         this.date = date;
     }
-    
+
     public int getHeight()
     {
         return height;
@@ -62,7 +64,7 @@ public class Order
     {
         return width;
     }
-    
+
     public int getLength()
     {
         return length;
@@ -87,5 +89,11 @@ public class Order
     {
         return db.isShipped(order_id);
     }
-    
+
+    @Override
+    public String toString()
+    {
+        return "Ordernumer:  " + order_id + " " + date;
+    }
+
 }

@@ -6,6 +6,7 @@
 package logic;
 
 import data.DBfacade;
+import data.DataException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +24,12 @@ public class LogicManager
     private ItemList itemlist = new ItemList(legoHouse);
     private DBfacade db;
 
-    public LogicManager() throws SQLException
+    public LogicManager() throws DataException
     {
         this.db = DBfacade.getInstance();
     }
 
-    public static LogicManager getInstance() throws SQLException
+    public static LogicManager getInstance() throws DataException
     {
         if (instance == null)
         {
@@ -47,12 +48,12 @@ public class LogicManager
         return itemlist.getLegoHouse();
     }
 
-    public User userLogin(String email, String password) throws SQLException
+    public User userLogin(String email, String password) throws DataException
     {
         return db.userLogin(email, password);
     }
 
-    public String createOrder(Order newOrder) throws SQLException
+    public String createOrder(Order newOrder) throws DataException
     {
         if (newOrder == null)
         {
@@ -65,27 +66,27 @@ public class LogicManager
 
     }
 
-    public Order getOrder(int order_id) throws SQLException
+    public Order getOrder(int order_id) throws DataException
     {
         return db.getOrder(order_id);
     }
     
-    public List<Order> getOrders(User user) throws SQLException
+    public List<Order> getOrders(User user) throws DataException
     {
         return db.getOrders(user.getId());
     }
     
-    public List<Order> getAllOrders() throws SQLException
+    public List<Order> getAllOrders() throws DataException
     {
         return db.getAllOrders();
     }
     
-    public User getUser(int user_id) throws SQLException
+    public User getUser(int user_id) throws DataException
     {
         return db.getUser(user_id);
     }
 
-    public String createUser(User u) throws SQLException
+    public String createUser(User u) throws DataException
     {
         boolean add = false;
         if (!userExist(u))
@@ -99,7 +100,7 @@ public class LogicManager
         }
     }
 
-    private boolean userExist(User u) throws SQLException
+    private boolean userExist(User u) throws DataException
     {
         List<User> users = db.getAllUsers();
 

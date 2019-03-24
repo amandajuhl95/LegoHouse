@@ -6,7 +6,6 @@
 package presentation;
 
 import data.DataException;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import logic.LogicManager;
 
@@ -16,5 +15,5 @@ import logic.LogicManager;
  */
 public interface Command
 {
-    String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException, SQLException;
+    String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException;
 }

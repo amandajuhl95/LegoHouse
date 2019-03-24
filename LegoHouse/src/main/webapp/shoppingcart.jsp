@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
     <body>
@@ -34,13 +35,6 @@
         </form>
         <form action="LegoHouse" method="POST">  
             <button name="command" value="checkout">Place order</button>
-            <%
-                if (list != null)
-                {
-                    
-                }
-
-            %>
         </form>
         </center>
     </body>
