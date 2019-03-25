@@ -29,6 +29,7 @@
                     out.println("<option>" + "employee" + "</option>");
                 %>
             </select>
+            <br><br>
             <button name="command" value="create">Create</button><br><br>
             <%                
                 if (message != null)

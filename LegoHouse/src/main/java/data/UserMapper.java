@@ -77,7 +77,7 @@ class UserMapper
             String password = "";
             String role = "";
 
-            PreparedStatement statement = dbc.preparedStatement(query);
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
@@ -113,7 +113,7 @@ class UserMapper
             String password = "";
             String role = "";
 
-            PreparedStatement statement = dbc.preparedStatement(query);
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next())

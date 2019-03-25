@@ -24,6 +24,7 @@
                         out.println("<li><a href=\"command=customerOrder&selected=" + o.getOrder_id() + "\">" + o + "</a></li>");
                     }
                 %>
+                <br><br><button name="command" value="shop">Go back to shop</button>
             </form>
         </body>
     </center>

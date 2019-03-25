@@ -25,6 +25,7 @@
                     }
                 %>
             </form>
+            <br><br><button name="command" value="shop">Go back to shop</button>
         </body>
     </center>
 </html>

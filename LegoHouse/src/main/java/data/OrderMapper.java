@@ -52,7 +52,7 @@ class OrderMapper
             int height = 0;
             int user_id = user.getId();
 
-            PreparedStatement statement = dbc.preparedStatement(query);
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
@@ -77,6 +77,41 @@ class OrderMapper
         }
 
     }
+    
+    public User getUser(int user_id) throws DataException
+    {
+        try
+        {
+            String query
+                    = "SELECT * "
+                    + "FROM user "
+                    + "WHERE user_id = " + user_id + ";";
+
+            User user = null;
+            int id = 0;
+            String email = "";
+            String password = "";
+            String role = "";
+
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next())
+            {
+                id = rs.getInt("user_id");
+                email = rs.getString("email");
+                password = rs.getString("password");
+                role = rs.getString("role");
+
+                user = new User(user_id, email, password, role);
+            }
+
+            return user;
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
 
     public List<Order> getOrders(int user_id) throws DataException
     {
@@ -99,7 +134,7 @@ class OrderMapper
             int width = 0;
             int height = 0;
 
-            PreparedStatement statement = dbc.preparedStatement(query);
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next())

@@ -27,17 +27,20 @@
                 Order order = (Order) session.getAttribute("order");
 
                 out.println("<p>Measure: " + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight() + "</p>");
-
-                out.println("<p>Bricks of 4x2: " + list.getLegoHouse().get("4x2") + "</p>");
-                out.println("<p>Bricks of 2x2: " + list.getLegoHouse().get("2x2") + "</p>");
-                out.println("<p>Bricks of 1x2: " + list.getLegoHouse().get("1x2") + "</p>");
+            %>
+            <br><br>
+            <%
+                out.println("<p> Pieces of lego bricks </p>");
+                out.println("<p>(4x2): " + list.getLegoHouse().get("4x2") + " pieces</p>");
+                out.println("<p>(2x2): " + list.getLegoHouse().get("2x2") + " pieces</p>");
+                out.println("<p>(1x2): " + list.getLegoHouse().get("1x2") + " pieces</p>");
             %>
         </form>
         <form action="LegoHouse" method="POST">  
             <button name="command" value="checkout">Place order</button>
         </form>
-        </center>
-    </body>
+    </center>
+</body>
 </html>
 
 
