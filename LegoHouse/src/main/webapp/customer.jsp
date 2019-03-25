@@ -16,16 +16,17 @@
     <center>
         <body>
             <form action="LegoHouse" method="POST">
+                <button name="command" value="logout">Log out</button>
                 <h1>Your orders</h1>
                 <%
                     List<Order> orders = (List<Order>) session.getAttribute("orders");
                     for (Order o : orders)
                     {
-                        out.println("<li><a href=\"command=customerOrder&selected=" + o.getOrder_id() + "\">" + o + "</a></li>");
+                        out.println("<li><a href=\"LegoHouse?command=customerOrder&selected=" + o.getOrder_id() + "\">" + o + "</a></li>");
                     }
                 %>
+                <br><br><button name="command" value="shop">Go back to shop</button>
             </form>
-            <br><br><button name="command" value="shop">Go back to shop</button>
         </body>
     </center>
 </html>

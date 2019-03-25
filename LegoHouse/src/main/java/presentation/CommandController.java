@@ -29,6 +29,7 @@ public class CommandController
         commands.put("customerOrder", new CustomerOrderCommand("customerOrder.jsp"));
         commands.put("employee", new EmployeeCommand("employee.jsp"));
         commands.put("employeeOrder", new EmployeeOrderCommand("employeeOrder.jsp"));
+        commands.put("logout", new LogOutCommand("index.jsp"));
     }
     
     public static synchronized Command commandFrom(String key)

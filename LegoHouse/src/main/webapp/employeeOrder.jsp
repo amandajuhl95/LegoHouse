@@ -13,29 +13,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
+    <body>
     <center>
-        <body>
-            <form action="LegoHouse" method="POST">
-                <%
-                    ItemList list = (ItemList) session.getAttribute("previousL");
-                    Order order = (Order) session.getAttribute("previousO");
+        <form action="LegoHouse" method="POST">
+            <button name="command" value="shop">Go back to shop</button>
+            <%
+                ItemList list = (ItemList) session.getAttribute("previousL");
+                Order order = (Order) session.getAttribute("previousO");
 
-                    out.println("<b>Ordernumber: " + order.getOrder_id() + ". Date: " + order.getDate() + "</b>");
-                    out.println("<br><br>Email: " + order.getUser().getEmail() + " - id: " + order.getUser().getId());
+                out.println("<b><br><br>Ordernumber: " + order.getOrder_id() + ". Date: " + order.getDate() + "</b>");
+                //out.println("<br><br>Email: " + order.getUser().getEmail() + " - id: " + order.getUser().getId());
 
-                    out.println("<p> Order: " + order.getOrder_id() + ", Date: " + order.getDate() + "</p>");
+                out.println("<p> Order: " + order.getOrder_id() + ", Date: " + order.getDate() + "</p>");
 
-                    if (list != null)
-                    {
-                        out.println("<p>" + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight());
-                        out.println("<p>Bricks of 4x2: " + list.getLegoHouse().get("4x2") + "</p>");
-                        out.println("<p>Bricks of 2x2: " + list.getLegoHouse().get("2x2") + "</p>");
-                        out.println("<p>Bricks of 1x2: " + list.getLegoHouse().get("1x2") + "</p>");
-                    }
+                if (list != null)
+                {
+                    out.println("<p>" + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight());
+                    out.println("<p>Bricks of 4x2: " + list.getLegoHouse().get("4x2") + "</p>");
+                    out.println("<p>Bricks of 2x2: " + list.getLegoHouse().get("2x2") + "</p>");
+                    out.println("<p>Bricks of 1x2: " + list.getLegoHouse().get("1x2") + "</p>");
+                }
 
-                %>
-                <br><br><button name="command" value="shop">Go back to shop</button>
-            </form>
-        </body>
+            %>
+        </form>
     </center>
+</body>
 </html>

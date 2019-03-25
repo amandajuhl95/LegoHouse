@@ -13,19 +13,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>LegoShop</title>
     </head>
+    <body>
     <center>
-        <body>
-            <form action="LegoHouse" method="POST">
-                <h1>All orders</h1>
-                <%
-                    List<Order> allOrders = (List<Order>) session.getAttribute("allOrders");
-                    for (Order o : allOrders)
-                    {
-                        out.println("<li><a href=\"command=customerOrder&selected=" + o.getOrder_id() + "\">" + o + "</a></li>");
-                    }
-                %>
-                <br><br><button name="command" value="shop">Go back to shop</button>
-            </form>
-        </body>
-    </center>
+        <form action="LegoHouse" method="POST">
+            <button name="command" value="logout">Log out</button>
+            <h1>All orders</h1>
+            <%
+                List<Order> allOrders = (List<Order>) session.getAttribute("allOrders");
+                for (Order o : allOrders)
+                {
+                    out.println("<li><a href=\"LegoHouse?command=employeeOrder&selected=" + o.getOrder_id() + "\">" + o + "</a></li>");
+                }
+            %>
+            <br><br><button name="command" value="shop">Go back to shop</button>
+        </form>
+    </body>
+</center>
 </html>

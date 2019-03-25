@@ -16,6 +16,7 @@
     <body>
     <center>
         <form action="LegoHouse" method="POST">
+            <button name="command" value="logout">Log out</button><br><br>
             <h1>Welcome to the LegoShop</h1>
             Length <input type ="number" name ="length" value="" minlength="5" required="">
             Width <input type ="number" name ="width" value="" minlength="5" required="">
@@ -25,6 +26,8 @@
             <%
                 ItemList list = (ItemList) session.getAttribute("list");
                 Order order = (Order) session.getAttribute("order");
+                
+                out.println("<p>Email: " + order.getUser().getEmail() + "</p>");
 
                 out.println("<p>Measure: " + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight() + "</p>");
             %>

@@ -7,7 +7,6 @@ package logic;
 
 import data.DBfacade;
 import data.DataException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 

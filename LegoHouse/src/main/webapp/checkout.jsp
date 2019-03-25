@@ -15,6 +15,7 @@
     <body>
     <center>
         <form action="LegoHouse" method="POST">
+            <button name="command" value="logout">Log out</button>
             <br><br><br><br>
             <%
                 String message = (String) session.getAttribute("message");

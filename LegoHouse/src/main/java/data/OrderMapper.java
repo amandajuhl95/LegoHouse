@@ -34,14 +34,14 @@ class OrderMapper
     {
         try
         {
-            dbc.open();
 
+            dbc.open();
             Order order = null;
 
             String query
                     = "SELECT * "
-                    + "FROM order "
-                    + "WHERE order_id = '" + order_id + "';";
+                    + "FROM `order` "
+                    + "WHERE order_id = ?;";
 
             User user = null;
             int id = 0;
@@ -50,15 +50,14 @@ class OrderMapper
             int length = 0;
             int width = 0;
             int height = 0;
-            int user_id = user.getId();
 
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, order_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
             {
                 id = rs.getInt("order_id");
-                user_id = rs.getInt("user_id");
                 order_date = rs.getString("order_date");
                 shipped = rs.getString("shipped");
                 length = rs.getInt("length");
@@ -77,15 +76,15 @@ class OrderMapper
         }
 
     }
-    
+
     public User getUser(int user_id) throws DataException
     {
         try
         {
             String query
                     = "SELECT * "
-                    + "FROM user "
-                    + "WHERE user_id = " + user_id + ";";
+                    + "FROM `user` "
+                    + "WHERE user_id = ?;";
 
             User user = null;
             int id = 0;
@@ -94,6 +93,7 @@ class OrderMapper
             String role = "";
 
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
@@ -120,12 +120,12 @@ class OrderMapper
             dbc.open();
 
             List<Order> orders = new ArrayList<>();
-            User user = um.getUser(user_id);
+            //User user = um.getUser(user_id);
 
             String query
                     = "SELECT * "
-                    + "FROM order "
-                    + "WHERE user_id = '" + user_id + "';";
+                    + "FROM `order` "
+                    + "WHERE user_id = ?;";
 
             int order_id = 0;
             String order_date = "";
@@ -135,6 +135,7 @@ class OrderMapper
             int height = 0;
 
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, user_id);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next())

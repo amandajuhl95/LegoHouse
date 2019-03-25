@@ -14,18 +14,14 @@
         <title>LegoShop</title>
     </head>
     <body>
-
+        <form action="LegoHouse" method="POST">
+            <button name="command" value="logout">Log out</button><br><br>
+        </form>
         <form action="LegoHouse" method="POST">
             <%
                 User user = (User) session.getAttribute("user");
-                String ref = "LegoHouse?command=customer";
-
-                if (user.getRole().equals("employee"))
-                {
-                    ref = "LegoHouse?command=employee";
-                }
-
-                out.println("<a href=" + ref + ">Orders</a>");
+                out.println("<a href=LegoHouse?command=" + user.getRole() + ">Orders</a>");
+                out.println("<p>Email: " + user.getEmail() + "</p>");
             %>
             <center>
                 <h1>Welcome to the LegoShop</h1>
@@ -36,6 +32,5 @@
                 <button name="command" value="shoppingcart">Add to shoppingcart</button>
             </center>
         </form>
-
     </body>
 </html>
