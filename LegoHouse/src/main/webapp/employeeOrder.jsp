@@ -16,15 +16,11 @@
     <body>
     <center>
         <form action="LegoHouse" method="POST">
-            <button name="command" value="shop">Go back to shop</button>
             <%
                 ItemList list = (ItemList) session.getAttribute("previousL");
                 Order order = (Order) session.getAttribute("previousO");
 
                 out.println("<b><br><br>Ordernumber: " + order.getOrder_id() + ". Date: " + order.getDate() + "</b>");
-                //out.println("<br><br>Email: " + order.getUser().getEmail() + " - id: " + order.getUser().getId());
-
-                out.println("<p> Order: " + order.getOrder_id() + ", Date: " + order.getDate() + "</p>");
 
                 if (list != null)
                 {
@@ -35,6 +31,8 @@
                 }
 
             %>
+        <button name="command" value="shop">Go back to shop</button>
+        <br><br><button name="command" value="logout">Log out</button>
         </form>
     </center>
 </body>

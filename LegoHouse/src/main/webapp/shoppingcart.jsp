@@ -14,31 +14,36 @@
         <title>LegoShop</title>
     </head>
     <body>
-    <center>
         <form action="LegoHouse" method="POST">
-            <button name="command" value="logout">Log out</button><br><br>
-            <h1>Welcome to the LegoShop</h1>
-            Length <input type ="number" name ="length" value="" minlength="5" required="">
-            Width <input type ="number" name ="width" value="" minlength="5" required="">
-            Height <input type ="number" name ="height" value="" minlength="1" required="">
-            <button name="command" value="shoppingcart">Add to shoppingcart</button>
-
+            <button name="command" value="logout">Log out</button>
+        </form>
+        <form action="LegoHouse" method="POST">
             <%
                 ItemList list = (ItemList) session.getAttribute("list");
                 Order order = (Order) session.getAttribute("order");
-                
-                out.println("<p>Email: " + order.getUser().getEmail() + "</p>");
 
-                out.println("<p>Measure: " + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight() + "</p>");
+                out.println("<p>Email: " + order.getUser().getEmail() + "</p>");
             %>
-            <br><br>
-            <%
-                out.println("<p> Pieces of lego bricks </p>");
-                out.println("<p>(4x2): " + list.getLegoHouse().get("4x2") + " pieces</p>");
-                out.println("<p>(2x2): " + list.getLegoHouse().get("2x2") + " pieces</p>");
-                out.println("<p>(1x2): " + list.getLegoHouse().get("1x2") + " pieces</p>");
-            %>
+            <center>
+                <h1>Welcome to the LegoShop</h1>
+                Length <input type ="number" name ="length" value="" minlength="5" required="">
+                Width <input type ="number" name ="width" value="" minlength="5" required="">
+                Height <input type ="number" name ="height" value="" minlength="1" required="">
+                <button name="command" value="shoppingcart">Add to shoppingcart</button>
+
+                <%
+                    out.println("<p>Measure: " + order.getLength() + "x" + order.getWidth() + "x" + order.getHeight() + "</p>");
+                %>
+                <br><br>
+                <%
+                    out.println("<p> Pieces of lego bricks </p>");
+                    out.println("<p>(4x2): " + list.getLegoHouse().get("4x2") + " pieces</p>");
+                    out.println("<p>(2x2): " + list.getLegoHouse().get("2x2") + " pieces</p>");
+                    out.println("<p>(1x2): " + list.getLegoHouse().get("1x2") + " pieces</p>");
+                %>
+            </center>
         </form>
+    <center>
         <form action="LegoHouse" method="POST">  
             <button name="command" value="checkout">Place order</button>
         </form>

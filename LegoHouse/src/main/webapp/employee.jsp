@@ -16,7 +16,6 @@
     <body>
     <center>
         <form action="LegoHouse" method="POST">
-            <button name="command" value="logout">Log out</button>
             <h1>All orders</h1>
             <%
                 List<Order> allOrders = (List<Order>) session.getAttribute("allOrders");
@@ -26,6 +25,7 @@
                 }
             %>
             <br><br><button name="command" value="shop">Go back to shop</button>
+            <br><br><button name="command" value="logout">Log out</button>
         </form>
     </body>
 </center>

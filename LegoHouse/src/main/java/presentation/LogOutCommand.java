@@ -7,6 +7,7 @@ package presentation;
 
 import data.DataException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import logic.LogicManager;
 
 /**
@@ -25,6 +26,13 @@ public class LogOutCommand implements Command
     @Override
     public String execute(HttpServletRequest request, LogicManager manager) throws CommandException, DataException
     {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("order");
+        session.removeAttribute("allOrder");
+        session.removeAttribute("orders");
+        session.removeAttribute("list");
+        session.removeAttribute("message");
         return target; 
     }
     

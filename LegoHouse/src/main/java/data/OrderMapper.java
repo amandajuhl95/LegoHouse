@@ -120,7 +120,6 @@ class OrderMapper
             dbc.open();
 
             List<Order> orders = new ArrayList<>();
-            //User user = um.getUser(user_id);
 
             String query
                     = "SELECT * "
@@ -170,13 +169,11 @@ class OrderMapper
                     = "SELECT * FROM `order`;";
 
             int id = 0;
-            int user_id = 0;
             String order_date = "";
             String shipped = "";
             int length = 0;
             int width = 0;
             int height = 0;
-            User user = null;
 
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.executeQuery();
@@ -184,7 +181,6 @@ class OrderMapper
             while (rs.next())
             {
                 id = rs.getInt("order_id");
-                user_id = rs.getInt("user_id");
                 order_date = rs.getString("order_date");
                 shipped = rs.getString("shipped");
                 length = rs.getInt("length");
